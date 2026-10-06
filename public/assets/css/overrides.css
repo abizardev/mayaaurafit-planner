@@ -1,0 +1,685 @@
+/* ============================================================
+ * Bevel — Comprehensive Theme & Responsive Overrides
+ * Matches bevel2 layout, typography, animations, and compact mobile cards.
+ * ============================================================ */
+
+:root {
+  color-scheme: light !important;
+  --hero-bg-top: .5rem;
+}
+
+/* Latar gradien hero desktop */
+.hero_bg-2 {
+  position: absolute;
+  top: var(--hero-bg-top);
+  left: 0;
+  right: 0;
+  width: calc(100% - 1rem);
+  margin-inline: auto;
+  min-height: calc(100svh - var(--hero-bg-top));
+  z-index: 0;
+  pointer-events: none;
+  background-image: linear-gradient(#d2e5ff, #fff9ee);
+  border-radius: 1.5rem;
+}
+
+.hero_section h1.h1 {
+  position: relative;
+  z-index: 2;
+}
+
+/* Force visibility of critical UI elements */
+html.w-mod-js.w-mod-js:not(.w-mod-ix3):not(.w-mod-ix3) :is(
+  .hero_phone,
+  .hero_watch,
+  .intelligence_card .intelligence_floating,
+  .nav_main-wrapper,
+  .nav_main-inner a,
+  .nav_main .btn,
+  .nav_layout-2,
+  .hero_bottom-clip .hero_card-container,
+  .records_animation .records_phone-ui,
+  .qr_fixed .qr_container
+) {
+  visibility: visible !important;
+}
+
+html.bevel-force-show.w-mod-js.w-mod-js:not(.w-mod-ix3) :is(
+  .hero_phone,
+  .hero_watch,
+  .intelligence_card .intelligence_floating,
+  .hero_bottom-clip .hero_card-container,
+  .records_animation .records_phone-ui,
+  .qr_fixed .qr_container,
+  .nav_main-wrapper
+) {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Base resets */
+html {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+body {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior-y: auto !important;
+  touch-action: pan-y !important;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+#root,
+#bevel-app,
+.page-wrapper-2,
+.page-main {
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+img {
+  height: auto;
+}
+
+/* 3D phone mask and hero alignment */
+.hero_phone-ui {
+  width: 73.5%;
+  box-shadow: none;
+  transform-style: preserve-3d;
+  border-radius: 1.8em 1.8em 0 0;
+  display: flex;
+  position: absolute;
+  overflow: hidden;
+  transform: perspective(2000px) rotateX(-1deg) rotateY(-10deg) rotate(7deg) perspective(1440px) translate(-5%, -8.75%);
+}
+
+/* Extra features tab interactive styles */
+.extra_features-item {
+  cursor: pointer;
+  border-radius: 1.25rem;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.extra_features-item.is-active {
+  background-color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.extra_features-phone [data-tab-media] {
+  transition: opacity 0.3s ease;
+}
+
+.extra_features-phone [data-tab-media]:not(.is-active) {
+  display: none;
+  opacity: 0;
+}
+
+.extra_features-phone [data-tab-media].is-active {
+  display: block;
+  opacity: 1;
+}
+
+/* Accolades Marquee animation */
+@keyframes bevel-marquee-rtl {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee.cc-accolades {
+  overflow: clip;
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.marquee.cc-accolades .marquee_track {
+  display: flex;
+  flex: none;
+  width: max-content;
+  animation: bevel-marquee-rtl 42s linear infinite;
+  will-change: transform;
+}
+
+.marquee.cc-accolades .marquee_row.cc-accolades {
+  flex: none;
+  width: max-content;
+}
+
+/* ============================================================
+ * MOBILE RESPONSIVE (≤767px and ≤479px)
+ * Fixes:
+ * 1. Hero headline spacing under fixed navbar
+ * 2. Hero card background enclosing mockup (no bleeding/tembus)
+ * 3. Full-screen mockup display on bento cards (Daily Movement, Sleep & Water, Weekly Check-in)
+ * ============================================================ */
+
+@media screen and (max-width: 767px) {
+  /* Navigation fixed at top */
+  .navigation {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: calc(100% - 1rem) !important;
+    margin-inline: auto !important;
+    z-index: 100 !important;
+    padding-top: max(0.625rem, env(safe-area-inset-top)) !important;
+    padding-bottom: 0.5rem !important;
+  }
+
+  .nav_layout-2 {
+    padding: 0.5rem 0.5rem 0.5rem 0.75rem;
+    border-radius: 1rem;
+    background-color: rgb(255 255 255 / 0.92);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 0.25rem 1rem rgb(0 0 0 / 0.08);
+    align-items: center;
+  }
+
+  .nav_main-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    width: 100%;
+    height: auto;
+    overflow: clip;
+    transition: grid-template-rows 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .nav_main {
+    overflow: hidden;
+    min-height: 0;
+    width: 100%;
+    padding: 0;
+    gap: 0.5rem;
+  }
+
+  .bevel-nav-open .nav_main-wrapper {
+    grid-template-rows: 1fr;
+  }
+
+  .bevel-nav-open .nav_main {
+    padding: 0.75rem 0 0.75rem;
+  }
+
+  /* Hero Section: self-contained card container */
+  .hero_section.section-3 {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    min-height: 0 !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Hide dark tunnel video on mobile for bright sky view */
+  .hero_tunnel-container {
+    display: none !important;
+  }
+
+  .hero_bg-2 {
+    display: none !important; /* Background is now directly on hero_container for 100% boundary sync */
+  }
+
+  /* Hero Container Card: gradient background directly applied and enclosing the entire mockup */
+  .hero_container.container {
+    position: relative !important;
+    z-index: 1 !important;
+    width: calc(100% - 1rem) !important;
+    margin-inline: auto !important;
+    padding-top: max(6.75rem, calc(env(safe-area-inset-top) + 5.5rem)) !important;
+    padding-bottom: 1.5rem !important;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+    border-radius: 1.5rem !important;
+    overflow: hidden !important;
+    background: linear-gradient(180deg, #d2e5ff 0%, #fff9ee 100%) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+  }
+
+  .hero_clouds.u-p-absolute {
+    opacity: 0.6;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  /* Hero Typography & CTA */
+  .h1 {
+    font-size: clamp(2.1rem, 6vw + 0.5rem, 2.65rem) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.03em !important;
+    text-wrap: balance;
+  }
+
+  .hero_container .p-md {
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+    max-width: 28rem !important;
+    margin-inline: auto;
+    text-wrap: pretty;
+  }
+
+  .hero_container .btn {
+    width: 100%;
+    max-width: 22rem;
+    min-height: 50px;
+    margin-inline: auto;
+  }
+
+  /* Hero Phone Mockup & Watch */
+  .hero_bottom {
+    position: relative !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    margin-top: 1.5rem !important;
+    width: 100% !important;
+    aspect-ratio: auto !important;
+  }
+
+  .hero_phone-section {
+    position: relative !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    aspect-ratio: auto !important;
+    min-height: 0 !important;
+    padding-bottom: 0 !important;
+    height: auto !important;
+  }
+
+  .hero_phone-container {
+    position: relative !important;
+    width: clamp(230px, 70vw, 300px) !important;
+    max-width: 90% !important;
+    transform: none !important;
+    margin-inline: auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+  }
+
+  .hero_phone {
+    position: relative !important;
+    width: 100% !important;
+    transform: none !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .hero_phone img.phone-mask-2 {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .hero_phone-ui {
+    width: 73.5% !important;
+    transform: perspective(2000px) rotateX(-1deg) rotateY(-10deg) rotate(7deg) perspective(1440px) translate(-5%, -8.75%) !important;
+  }
+
+  .hero_watch {
+    position: absolute !important;
+    width: 58% !important;
+    top: 32% !important;
+    right: -8% !important;
+    z-index: 3 !important;
+  }
+
+  .hero_bottom-bg {
+    display: none !important;
+  }
+
+  /* Section Spacing */
+  .section-2 {
+    padding-top: 2.25rem !important;
+    padding-bottom: 2.25rem !important;
+  }
+
+  .works-with.section-3 {
+    min-height: 0;
+    padding-top: 2rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  .u-vgap-80-40 {
+    grid-row-gap: 1.75rem !important;
+  }
+
+  .u-vgap-64-40 {
+    grid-row-gap: 1.5rem !important;
+  }
+
+  .u-vgap {
+    grid-row-gap: 1.25rem !important;
+  }
+
+  /* General Typography */
+  .h2 {
+    font-size: clamp(1.5rem, 4.2vw + 0.3rem, 1.95rem) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.02em !important;
+    text-wrap: balance;
+  }
+
+  .h2-h3,
+  h3.h2-h3,
+  .h3,
+  .h4 {
+    font-size: clamp(1.2rem, 3.4vw + 0.3rem, 1.45rem) !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  .p-md {
+    font-size: 0.9375rem !important;
+    line-height: 1.55 !important;
+    max-width: 28rem !important;
+    margin-inline: auto;
+    text-wrap: pretty;
+  }
+
+  /* ============================================================
+   * Bento Cards: Daily Movement, Sleep & Water, Weekly Check-in
+   * Full screen mockup display without clipping
+   * ============================================================ */
+  .feature_card {
+    border-radius: 1.5rem !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background-color: #ebf0f8 !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  }
+
+  .feature_card.cc-orange {
+    background-image: linear-gradient(180deg, #ffffff 0%, #ffab9433 70%, #ffab9466 100%) !important;
+  }
+
+  .feature_card.cc-blue {
+    background-image: linear-gradient(180deg, #ffffff 0%, #415eee33 70%, #415eee66 100%) !important;
+  }
+
+  .feature_card.cc-green {
+    background-image: linear-gradient(180deg, #ffffff 0%, #31ce0133 70%, #31ce0166 100%) !important;
+  }
+
+  .feature_card-top {
+    padding: 1.5rem 1.35rem 0.5rem !important;
+  }
+
+  .feature_card-top .h3 {
+    font-size: 1.35rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.35rem;
+  }
+
+  .feature_card-top .p-md {
+    font-size: 0.9375rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .feature_card-content {
+    position: relative !important;
+    width: 100% !important;
+    aspect-ratio: 370 / 380 !important;
+    height: auto !important;
+    max-height: 380px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-end !important;
+    overflow: hidden !important;
+    margin-top: 0.5rem !important;
+  }
+
+  .feature_phone {
+    position: absolute !important;
+    bottom: 0 !important;
+    width: clamp(190px, 56%, 230px) !important;
+    max-width: 62% !important;
+    display: flex !important;
+    justify-content: center !important;
+    z-index: 1 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .feature_phone img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    margin-bottom: 0 !important;
+  }
+
+  .feature_card-fg.cc-1 {
+    position: absolute !important;
+    width: 82% !important;
+    bottom: 6% !important;
+    z-index: 2 !important;
+  }
+
+  .feature_card-fg.cc-2 {
+    position: absolute !important;
+    width: 36% !important;
+    bottom: 28% !important;
+    left: 8% !important;
+    z-index: 2 !important;
+  }
+
+  .feature_card-fg.cc-3 {
+    position: absolute !important;
+    width: 84% !important;
+    bottom: 18% !important;
+    z-index: 2 !important;
+  }
+
+  /* Horizontal Bento Cards */
+  .feature_horizontal-layout {
+    border-radius: 1.5rem !important;
+    padding: 1.35rem !important;
+    overflow: hidden !important;
+    gap: 0.75rem !important;
+  }
+
+  .feature_horizontal-content {
+    padding: 0 0 0.5rem !important;
+  }
+
+  .records_animation {
+    margin-top: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .records_phone {
+    width: min(65%, 230px) !important;
+    margin: 1.5rem auto 0 !important;
+  }
+
+  .records_circle-container {
+    width: 115% !important;
+    left: -7.5% !important;
+  }
+
+  /* Intelligence Cards */
+  .intelligence_card {
+    border-radius: 1.5rem !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 1.35rem 1.35rem 0 !important;
+    overflow: hidden !important;
+  }
+
+  .intelligence_text {
+    padding: 0 0 0.5rem !important;
+  }
+
+  .intelligence_fixed {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .intelligence_content-container {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-end !important;
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .intelligence_content {
+    position: relative !important;
+    width: clamp(190px, 56%, 240px) !important;
+    margin-inline: auto !important;
+    margin-bottom: -3px !important;
+  }
+
+  .intelligence_content img.phone-mask {
+    width: 100% !important;
+    display: block !important;
+    margin-bottom: 0 !important;
+  }
+
+  .intelligence_floating {
+    max-width: 85% !important;
+  }
+
+  /* Extra Features */
+  .extra_features-item {
+    padding: 1rem 1.125rem !important;
+    border-radius: 1rem !important;
+  }
+
+  .extra_features-item .h4 {
+    font-size: 1.125rem !important;
+  }
+
+  .extra_features-item .p-md,
+  .extra_features-item p {
+    font-size: 0.875rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .extra_features-phone.phone-mask {
+    width: min(72%, 260px) !important;
+    margin-inline: auto !important;
+  }
+
+  /* Crafted strip & Testimonials */
+  .craft_container {
+    width: 100%;
+    max-width: 100%;
+    padding-inline: 0.5rem;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .craft_container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .craft_container [craft-col] {
+    width: 8rem;
+    flex: none;
+  }
+
+  .crafted_frame.cc-large {
+    height: 12.5rem;
+  }
+
+  .crafted_frame.cc-medium {
+    height: 9.5rem;
+  }
+
+  .crafted_frame.cc-small {
+    height: 4.25rem;
+  }
+
+  .marquee.cc-cards {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .marquee.cc-cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .marquee_card {
+    width: 16.5rem !important;
+    padding: 1.25rem !important;
+  }
+
+  .works-with_marquee-col {
+    height: 1.125rem;
+  }
+
+  .privacy_container {
+    border-radius: 1.5rem;
+    padding: 2rem 1.25rem;
+    min-height: 20rem;
+  }
+
+  .qr_fixed {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .hero_container.container {
+    padding-top: max(6.5rem, calc(env(safe-area-inset-top) + 5.25rem)) !important;
+  }
+
+  .hero_phone-container {
+    width: min(80vw, 280px) !important;
+  }
+
+  .craft_container [craft-col] {
+    width: 7.25rem;
+  }
+
+  .feature_card-content {
+    aspect-ratio: 370 / 370 !important;
+  }
+
+  .feature_phone {
+    width: clamp(180px, 58%, 215px) !important;
+  }
+}
+
+/* Stagger Testimonials Container */
+.stagger-testimonials-container {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 767px) {
+  .stagger-testimonials-container {
+    margin-top: 0.5rem;
+  }
+}
