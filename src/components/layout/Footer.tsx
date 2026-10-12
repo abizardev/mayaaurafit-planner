@@ -1,54 +1,94 @@
 import React from "react";
-import { Sparkles, Heart } from "lucide-react";
 
 export const Footer: React.FC = () => {
+  const footerSections = [
+    {
+      title: "Product",
+      links: [
+        { label: "Overview", href: "#" },
+        { label: "Strain & Recovery", href: "#features" },
+        { label: "Sleep Intelligence", href: "#features" },
+        { label: "Biomarker Lab", href: "#features" },
+        { label: "Pricing & Plans", href: "#" },
+      ],
+    },
+    {
+      title: "Science & Clinical",
+      links: [
+        { label: "Scientific Advisory", href: "#" },
+        { label: "Clinical Validation", href: "#" },
+        { label: "Biomarker Glossary", href: "#" },
+        { label: "Research Papers", href: "#" },
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        { label: "About Bevel", href: "#" },
+        { label: "Careers", href: "#" },
+        { label: "Journal & Stories", href: "#" },
+        { label: "Press Kit", href: "#" },
+      ],
+    },
+    {
+      title: "Legal & Trust",
+      links: [
+        { label: "Privacy Policy", href: "#" },
+        { label: "Terms of Service", href: "#" },
+        { label: "HIPAA Compliance", href: "#" },
+        { label: "Security Overview", href: "#" },
+      ],
+    },
+  ];
+
   return (
-    <footer className="bg-[#FFF5F8] border-t border-[#FCE7F3] py-12 sm:py-16">
+    <footer className="bg-white border-t border-black/5 py-16 sm:py-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-10 border-b border-[#FCE7F3]">
-          
-          {/* Logo & description */}
-          <div className="text-center md:text-left space-y-2">
-            <div className="flex items-center justify-center md:justify-start gap-2.5">
-              <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-[#F43F5E] to-[#FB7185] flex items-center justify-center text-white">
-                <Sparkles className="w-3.5 h-3.5 fill-white" />
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12 pb-16 border-b border-black/5">
+          {/* Brand Info */}
+          <div className="col-span-2 md:col-span-1">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-7 h-7 rounded-full bg-[#1f2025] flex items-center justify-center text-white font-bold text-sm tracking-tighter">
+                B
               </div>
-              <span className="font-serif text-2xl font-bold text-[#2D2327]">
-                MayaAuraFit<span className="text-[#F43F5E]">.</span>
+              <span className="font-semibold text-lg text-[#222326] font-display">
+                Plan<span className="text-[#415eee]">.</span>
               </span>
             </div>
-            <p className="text-xs sm:text-sm text-[#76656E] max-w-sm">
-              Small habits, big changes. Aesthetic printable and digital fitness habit planners crafted with care.
+            <p className="text-xs sm:text-sm text-[#747679] leading-relaxed">
+              Connected health intelligence and longevity tracking built with Apple-grade craftsmanship.
             </p>
           </div>
 
           {/* Links */}
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm font-medium text-[#4A3E45]">
-            <a href="#hero" className="hover:text-[#F43F5E] transition-colors">Home</a>
-            <a href="#features" className="hover:text-[#F43F5E] transition-colors">Features</a>
-            <a href="#whats-inside" className="hover:text-[#F43F5E] transition-colors">What's Inside</a>
-            <a href="#reviews" className="hover:text-[#F43F5E] transition-colors">Reviews</a>
-            <a href="#faq" className="hover:text-[#F43F5E] transition-colors">FAQ</a>
-          </div>
-
+          {footerSections.map((sec) => (
+            <div key={sec.title}>
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-[#222326] mb-4">
+                {sec.title}
+              </h4>
+              <ul className="space-y-2.5">
+                {sec.links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="text-xs sm:text-sm text-[#747679] hover:text-[#222326] transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#76656E]">
-          <p>© {new Date().getFullYear()} MayaAuraFit. All rights reserved.</p>
-          
-          <div className="flex items-center gap-1">
-            <span>Designed with</span>
-            <Heart className="w-3.5 h-3.5 fill-[#F43F5E] text-[#F43F5E]" />
-            <span>for your glow-up journey</span>
-          </div>
-
-          <div className="flex gap-4">
-            <a href="#" className="hover:underline">Privacy Policy</a>
-            <span>•</span>
-            <a href="#" className="hover:underline">Terms of Service</a>
-          </div>
+        {/* Bottom copyright */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#747679]">
+          <p>© {new Date().getFullYear()} Plan / Bevel Health Inc. All rights reserved.</p>
+          <p className="text-center sm:text-right">
+            Designed for high longevity, daily recovery, and restorative sleep.
+          </p>
         </div>
 
       </div>

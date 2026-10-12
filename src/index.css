@@ -1,63 +1,169 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
-
-  --color-pastel-blush: #fff5f8;
-  --color-pastel-pink: #fdf2f7;
-  --color-pastel-rose: #fbcfe8;
-  --color-pastel-peach: #ffedd5;
-  --color-pastel-cream: #fffaf0;
-  --color-pastel-lilac: #f3e8ff;
-  --color-pastel-mint: #ecfdf5;
-
-  --color-rose-accent: #f43f5e;
-  --color-rose-soft: #fb7185;
-  --color-charcoal-deep: #2d2327;
-  --color-charcoal-body: #4a3e45;
-  --color-charcoal-muted: #76656e;
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
 }
 
 @layer base {
   :root {
     color-scheme: light;
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 224 71.4% 4.1%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 71.4% 4.1%;
+    --radius: 0.5rem;
+
+    --paper-white: #ffffff;
+    --charcoal: #1f2025;
+    --ink: #222326;
+    --cloud-card: #ebf0f8;
+    --body-gray: #747679;
+    --signal-gold: #ffca00;
+    --coral-signal: #ffab94;
+    --recovery-green: #31ce01;
+    --metric-blue: #415eee;
+    --sleep-lilac: #b9a6ff;
   }
 
   html {
     scroll-behavior: smooth;
-    font-family: var(--font-sans);
-    color: #2d2327;
-    background-color: #fff8fa;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background-color: var(--paper-white);
     overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   body {
     overflow-x: hidden;
-    background-color: #fff8fa;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
   }
 
-  ::selection {
-    background-color: #fbcfe8;
-    color: #831843;
-  }
-
-  /* Custom smooth scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #fff5f8;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #f472b6;
-    border-radius: 9999px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #e11d48;
+  /* Display typography with Bevel tight tracking */
+  h1, h2, h3, h4, .font-display {
+    letter-spacing: -0.03em;
   }
 }
 
+/* Custom utilities for Bevel token classes */
+@utility bg-paper-white {
+  background-color: #ffffff;
+}
+
+@utility bg-charcoal {
+  background-color: #1f2025;
+}
+
+@utility text-charcoal {
+  color: #1f2025;
+}
+
+@utility bg-cloud-card {
+  background-color: #ebf0f8;
+}
+
+@utility text-cloud-card {
+  color: #ebf0f8;
+}
+
+@utility text-ink {
+  color: #222326;
+}
+
+@utility text-body-gray {
+  color: #747679;
+}
+
+@utility bg-signal-gold {
+  background-color: #ffca00;
+}
+
+@utility text-signal-gold {
+  color: #ffca00;
+}
+
+@utility bg-metric-blue {
+  background-color: #415eee;
+}
+
+@utility text-metric-blue {
+  color: #415eee;
+}
+
+@utility bg-recovery-green {
+  background-color: #31ce01;
+}
+
+@utility text-recovery-green {
+  color: #31ce01;
+}
+
+@utility bg-sleep-lilac {
+  background-color: #b9a6ff;
+}
+
+@utility text-sleep-lilac {
+  color: #b9a6ff;
+}
+
+@utility bg-coral-signal {
+  background-color: #ffab94;
+}
+
+@utility text-coral-signal {
+  color: #ffab94;
+}
+
+/* Hero Sky background gradient */
+@utility bg-hero-sky {
+  background: linear-gradient(180deg, #d2e5ff 0%, #fff9ee 100%);
+}
+
+@utility rounded-pill {
+  border-radius: 9999px;
+}
+
+@utility rounded-card {
+  border-radius: 28px;
+}
+
+/* Custom marquee animation */
 @keyframes marquee {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-50%); }
@@ -66,22 +172,9 @@
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 30s linear infinite;
+  animation: marquee 35s linear infinite;
 }
 
 .animate-marquee:hover {
   animation-play-state: paused;
-}
-
-/* Glass & Pastel card elevations */
-.pastel-card {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(251, 207, 232, 0.5);
-  box-shadow: 0 10px 30px -5px rgba(244, 114, 182, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
-}
-
-.pastel-card:hover {
-  border-color: rgba(244, 114, 182, 0.6);
-  box-shadow: 0 16px 36px -4px rgba(244, 114, 182, 0.15), 0 6px 12px -2px rgba(0, 0, 0, 0.04);
 }
