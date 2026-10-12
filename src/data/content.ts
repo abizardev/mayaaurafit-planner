@@ -1,4 +1,41 @@
-import { NavItem, PartnerBrand, BentoFeature, TestimonialItem } from "../types";
+export interface NavItem {
+  label: string;
+  href: string;
+}
+
+export interface FeatureCard {
+  id: string;
+  title: string;
+  tagline: string;
+  description: string;
+  badge: string;
+  image: string;
+}
+
+export interface PlannerPageItem {
+  id: string;
+  title: string;
+  category: "all" | "habits" | "meals" | "workouts" | "reflection";
+  categoryLabel: string;
+  description: string;
+  image: string;
+}
+
+export interface Testimonial {
+  id: string;
+  name: string;
+  role: string;
+  avatar: string;
+  comment: string;
+  rating: number;
+  highlight: string;
+  verified: boolean;
+}
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
 
 export const navItems: NavItem[] = [
   { label: "Home", href: "#hero" },
@@ -8,125 +45,179 @@ export const navItems: NavItem[] = [
   { label: "FAQ", href: "#faq" },
 ];
 
-export const partnerBrands: PartnerBrand[] = [
-  { name: "Printable PDF", logo: "/assets/images/planner/01-hero-cover-glowup-planner.webp", category: "Printable" },
-  { name: "GoodNotes", logo: "/assets/images/planner/02-daily-movement-workout-log.webp", category: "Digital App" },
-  { name: "Notability", logo: "/assets/images/planner/03-sleep-water-hydration-tracker.webp", category: "Digital App" },
-  { name: "iPad & Tablet", logo: "/assets/images/planner/04-weekly-checkin-planner.webp", category: "Tablet" },
+export const tickerItems = [
+  "✦ HEALTHIER HABITS",
+  "✦ STRONGER YOU",
+  "✦ MAYAAURAFIT",
+  "✦ 63+ PRINTABLE PAGES",
+  "✦ INSTANT DOWNLOAD",
+  "✦ PRINT AS MANY AS YOU NEED",
+  "✦ COMPATIBLE WITH IPAD & GOODNOTES",
+  "✦ 100% HAPPINESS GUARANTEE",
 ];
 
-export const heroStats = {
-  rating: 4.9,
-  totalRatings: "28,600+",
-  activeMembers: "35,000+",
-  tagline: "Small Habits. Big Changes.",
-};
-
-export const bentoFeatures: BentoFeature[] = [
+export const featureCards: FeatureCard[] = [
   {
-    id: "strain-energy",
-    title: "Energy Bank & Daily Strain",
-    subtitle: "Real-time strain calculation",
-    description: "Balances exertion against your real-time recovery. Know precisely when to push harder in training or prioritize active rest before burn out.",
-    badge: "Recovery & Strain",
-    categoryColor: "#31ce01",
-    imageSrc: "/assets/images/ui/home-message.avif",
-    metrics: [
-      { label: "Daily Strain Target", value: "14.2", trend: "+1.2 vs yesterday" },
-      { label: "Energy Remaining", value: "68%", trend: "Optimal window" },
-    ],
+    id: "daily-habits",
+    title: "Track Your Daily Habits",
+    tagline: "Stay consistent with your workouts, meals, and healthy routines.",
+    description: "Build effortless morning and evening routines with structured checklists that keep you motivated every day.",
+    badge: "Daily Routine",
+    image: "/assets/images/planner/07-daily-habit-tracker-checklist.webp",
   },
   {
-    id: "sleep-circadian",
-    title: "Sleep Quality & Circadian Clock",
-    subtitle: "Wake up restored, eliminate debt",
-    description: "Advanced stage sleep breakdown (Deep, REM, Light) coupled with smart alarms tuned to your personal sleep latency and circadian rhythm.",
-    badge: "Restorative Sleep",
-    categoryColor: "#b9a6ff",
-    imageSrc: "/assets/images/ui/home-message-4.avif",
-    metrics: [
-      { label: "Sleep Score", value: "92%", trend: "High Restoration" },
-      { label: "Sleep Debt", value: "12m", trend: "Down 45m this week" },
-    ],
+    id: "plan-meals",
+    title: "Plan Your Meals",
+    tagline: "Fuel your body with balanced and nutritious meals every day.",
+    description: "Weekly food logs, hydration tracking, and grocery guides designed to eliminate mealtime stress.",
+    badge: "Nutrition Guide",
+    image: "/assets/images/planner/05-meal-prep-food-journal.webp",
   },
   {
-    id: "nutrition-food",
-    title: "Biomarker Nutrition Tracker",
-    subtitle: "Food impact on physiological data",
-    description: "Connect meal intake to glucose peaks, heart rate variability dips, and next-day recovery. Eat for longevity, not just counting calories.",
-    badge: "Metabolic Health",
-    categoryColor: "#ffab94",
-    imageSrc: "/assets/images/ui/home-message-5.avif",
-    metrics: [
-      { label: "Metabolic Stability", value: "88/100", trend: "Balanced" },
-      { label: "Recovery Impact", value: "+14%", trend: "Anti-inflammatory" },
-    ],
+    id: "stay-organized",
+    title: "Stay Organized",
+    tagline: "Keep track of your goals, workouts, and progress all in one place.",
+    description: "Structured workout logs, sets, reps, and weekly check-in schedules that turn vague goals into actionable steps.",
+    badge: "Workout Logs",
+    image: "/assets/images/planner/04-weekly-checkin-planner.webp",
   },
   {
-    id: "biomarkers-longevity",
-    title: "Longevity & Clinical Biomarkers",
-    subtitle: "390+ Lab markers synthesized",
-    description: "Transform complex bloodwork, ApoB, lipid panels, and hormonal tests into a unified biological age and actionable lifestyle prescriptions.",
-    badge: "Clinical Intelligence",
-    categoryColor: "#415eee",
-    imageSrc: "/assets/images/ui/biology-ldl-p-800.avif",
-    metrics: [
-      { label: "Biological Age", value: "28.4 yrs", trend: "4.1 yrs younger" },
-      { label: "Cardio Health", value: "Vo2 Max 52", trend: "Top 5% bracket" },
-    ],
+    id: "see-progress",
+    title: "See Your Progress",
+    tagline: "Celebrate your small wins and keep going!",
+    description: "Visual 30-day and 90-day streak grids, body measurement milestones, and reflection pages that celebrate every victory.",
+    badge: "Streak Tracker",
+    image: "/assets/images/planner/13-monthly-streak-progress-grid.webp",
+  },
+  {
+    id: "jot-thoughts",
+    title: "Jot Down Thoughts",
+    tagline: "Write your goals, reminders, and motivations.",
+    description: "Mindset journaling, weekly reflections, and habit stacking worksheets to nourish your mental well-being.",
+    badge: "Mindset & Goals",
+    image: "/assets/images/planner/12-reflection-journal-challenge-start.webp",
   },
 ];
 
-export const coachModes = [
+export const plannerGallery: PlannerPageItem[] = [
   {
-    id: "commander",
-    title: "Coach Commander",
-    role: "Performance & Discipline",
-    description: "Direct, no-nonsense daily targets. Pushes your VO2 max and workout thresholds when your body is fully recovered.",
-    badge: "High Performance",
+    id: "p1",
+    title: "90-Day Glow Up Cover & Roadmap",
+    category: "reflection",
+    categoryLabel: "Overview",
+    description: "Aesthetic cover page with your personal goals, milestone rewards, and intention roadmap.",
+    image: "/assets/images/planner/01-hero-cover-glowup-planner.webp",
   },
   {
-    id: "friend",
-    title: "Coach Friend",
-    role: "Balance & Consistency",
-    description: "Encouraging and adaptable. Adjusts targets around busy travel schedules, family events, and stress spikes.",
-    badge: "Holistic Wellness",
+    id: "p2",
+    title: "Daily Movement & Workout Log",
+    category: "workouts",
+    categoryLabel: "Fitness",
+    description: "Detailed daily exercises, sets, reps, cardio time, and post-workout energy levels.",
+    image: "/assets/images/planner/02-daily-movement-workout-log.webp",
   },
   {
-    id: "guardian",
-    title: "Coach Guardian",
-    role: "Longevity & Injury Prevention",
-    description: "Meticulous focus on biomarker stability, heart rate variability restoration, and chronic stress reduction.",
-    badge: "Preventative Health",
+    id: "p3",
+    title: "Hydration & Sleep Recovery Tracker",
+    category: "habits",
+    categoryLabel: "Wellness",
+    description: "Monitor your 8 daily glasses of water, bedtime routine, and sleep quality scores.",
+    image: "/assets/images/planner/03-sleep-water-hydration-tracker.webp",
+  },
+  {
+    id: "p4",
+    title: "Weekly Check-In & Goal Alignment",
+    category: "habits",
+    categoryLabel: "Weekly",
+    description: "Review what worked, what needs adjusting, and celebrate your weekly achievements.",
+    image: "/assets/images/planner/04-weekly-checkin-planner.webp",
+  },
+  {
+    id: "p5",
+    title: "Meal Prep & Nutritious Food Journal",
+    category: "meals",
+    categoryLabel: "Nutrition",
+    description: "Breakfast, lunch, dinner, snack planner and healthy grocery checklist.",
+    image: "/assets/images/planner/05-meal-prep-food-journal.webp",
+  },
+  {
+    id: "p6",
+    title: "Monthly Streak & Habit Progress Grid",
+    category: "habits",
+    categoryLabel: "Progress",
+    description: "Fill-in color streak squares that make consistency feel like a game.",
+    image: "/assets/images/planner/13-monthly-streak-progress-grid.webp",
+  },
+  {
+    id: "p7",
+    title: "Body Measurements & Milestone Tracker",
+    category: "workouts",
+    categoryLabel: "Milestones",
+    description: "Track non-scale victories, strength improvements, and body transformation checkpoints.",
+    image: "/assets/images/planner/11-body-measurements-starting-point.webp",
+  },
+  {
+    id: "p8",
+    title: "Habit Stacking & Self-Care Reflection",
+    category: "reflection",
+    categoryLabel: "Mindset",
+    description: "Guided worksheets to anchor new fitness habits onto existing daily routines seamlessly.",
+    image: "/assets/images/planner/16-habit-stacking-worksheet-reflection.webp",
   },
 ];
 
-export const memberStories: TestimonialItem[] = [
+export const reviews: Testimonial[] = [
   {
-    id: "1",
-    name: "Dr. Andrew K.",
-    role: "Cardiologist & Marathoner",
+    id: "t1",
+    name: "Sarah M.",
+    role: "Marketing Manager & Fitness Enthusiast",
     avatar: "/assets/images/members/member-photos-01.avif",
-    quote: "Bevel translates raw biometrics into clarity that even clinical athletes appreciate. The strain-to-recovery feedback loop is second to none.",
+    comment: "This planner completely changed how I look at daily routines. Instead of feeling guilty, the pastel layout makes me look forward to opening it every morning with coffee!",
     rating: 5,
-    highlightMetric: "VO2 Max +12%",
+    highlight: "90-day streak unbroken",
+    verified: true,
   },
   {
-    id: "2",
-    name: "Elena R.",
-    role: "Tech Founder & Mother",
+    id: "t2",
+    name: "Chloe T.",
+    role: "Busy Mom of Two",
     avatar: "/assets/images/members/member-photos-02.avif",
-    quote: "Eliminated chronic sleep debt within 30 days. Seeing my sleep latency and wake-up phases connected to afternoon caffeine was eye-opening.",
+    comment: "I printed the meal prep and habit sheets and stuck them on my fridge. It took away so much mental clutter and my family is eating healthier together.",
     rating: 5,
-    highlightMetric: "Sleep Score 94%",
+    highlight: "Saved 4+ hours every week",
+    verified: true,
   },
   {
-    id: "3",
-    name: "Marcus V.",
-    role: "CrossFit Coach",
+    id: "t3",
+    name: "Amanda L.",
+    role: "Pilates Instructor",
     avatar: "/assets/images/members/member-photos-03.avif",
-    quote: "The cleanest UI on any health app. No fluff, no useless notifications—just actionable insight every morning right when I need it.",
+    comment: "I use this digitally in GoodNotes on my iPad Pro. The hyperlinks and clean aesthetic are absolutely top tier. I recommend it to all my clients!",
     rating: 5,
-    highlightMetric: "Recovery +22%",
+    highlight: "iPad & GoodNotes favorite",
+    verified: true,
+  },
+];
+
+export const faqs: FaqItem[] = [
+  {
+    question: "How do I receive my planner after purchasing?",
+    answer: "You get instant lifetime access! Immediately after checkout, you will receive a secure download link containing the full high-resolution PDF bundle (both A4 and US Letter sizes) ready to print or import into your tablet.",
+  },
+  {
+    question: "Can I use this digitally on an iPad or tablet?",
+    answer: "Yes, absolutely! The PDF files are fully compatible with digital annotation apps such as GoodNotes, Notability, CollaNote, and Noteshelf on iPad and Android tablets.",
+  },
+  {
+    question: "What printer settings and paper size should I use?",
+    answer: "The bundle includes both standard US Letter (8.5 x 11 in) and International A4 files. You can print at 100% scale on any standard home printer or take the files to a local print shop.",
+  },
+  {
+    question: "Are the pages dated or undated?",
+    answer: "Every page is 100% undated! That means you can start on any day of the year without wasting pages, pause when traveling, and reuse the planner forever.",
+  },
+  {
+    question: "Can I print individual sheets multiple times?",
+    answer: "Yes! You have personal license rights to print as many copies of any worksheet (daily tracker, weekly meals, workout logs) as you need for yourself forever.",
   },
 ];

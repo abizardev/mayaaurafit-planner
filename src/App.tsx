@@ -1,105 +1,89 @@
-import React, { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { bevelPageHtml } from "./data/bevelPageHtml";
-import { initVideoTabs } from "./lib/videoTabs";
-import { StaggerTestimonials } from "./components/ui/stagger-testimonials";
+import React, { useState } from "react";
+import { Navbar } from "./components/layout/Navbar";
+import { HeroSection } from "./components/sections/HeroSection";
+import { MarqueeRibbon } from "./components/sections/MarqueeRibbon";
+import { FeatureCardsSection } from "./components/sections/FeatureCardsSection";
+import { HealthMattersSection } from "./components/sections/HealthMattersSection";
+import { TrackImproveSection } from "./components/sections/TrackImproveSection";
+import { WhatsInsideSection } from "./components/sections/WhatsInsideSection";
+import { ReviewsSection } from "./components/sections/ReviewsSection";
+import { PricingCtaSection } from "./components/sections/PricingCtaSection";
+import { FaqSection } from "./components/sections/FaqSection";
+import { Footer } from "./components/layout/Footer";
+import { ImageLightboxModal } from "./components/ui/ImageLightboxModal";
+import { DownloadModal } from "./components/ui/DownloadModal";
 
 export function App() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [testimonialsMount, setTestimonialsMount] = useState<HTMLElement | null>(null);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<{ src: string; title: string } | null>(null);
 
-  useEffect(() => {
-    // 1. Force show any elements hidden by Webflow gate
-    document.documentElement.classList.add("bevel-force-show");
+  const handleOpenCheckout = () => {
+    setCheckoutOpen(true);
+  };
 
-    // 2. Hydrate lazy videos with data-src (except tab media which is managed by videoTabs)
-    const videos = document.querySelectorAll<HTMLVideoElement>("video");
-    videos.forEach((v) => {
-      if (v.closest("[data-tab-media]")) return; // skip tab media
-
-      const dataSrc = v.getAttribute("data-src");
-      if (dataSrc) {
-        let srcEl = v.querySelector<HTMLSourceElement>("source");
-        if (srcEl && !srcEl.getAttribute("src")) {
-          srcEl.setAttribute("src", dataSrc);
-        } else if (!srcEl && !v.getAttribute("src")) {
-          v.setAttribute("src", dataSrc);
-        }
-      }
-      // Ensure autoplay videos play properly
-      v.muted = true;
-      v.setAttribute("playsinline", "true");
-      v.play().catch(() => {});
-    });
-
-    // 3. Initialize "And that's not all" Interactive Video Tabs
-    const cleanupVideoTabs = initVideoTabs();
-
-    // 4. Mount Stagger Testimonials React portal
-    const target = document.getElementById("stagger-testimonials");
-    if (target) {
-      setTestimonialsMount(target);
-    }
-
-    // 5. Mobile menu drawer handler
-    const toggle = document.querySelector<HTMLElement>(".nav_menu-2");
-    const nav = document.querySelector<HTMLElement>(".navigation");
-    if (toggle && nav && toggle.dataset.bevelNav !== "ready") {
-      toggle.dataset.bevelNav = "ready";
-      toggle.setAttribute("role", "button");
-      toggle.setAttribute("tabindex", "0");
-      toggle.setAttribute("aria-label", "Buka menu navigasi");
-      toggle.setAttribute("aria-expanded", "false");
-
-      const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
-      const setOpen = (open: boolean) => {
-        nav.classList.toggle("bevel-nav-open", open);
-        toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      };
-
-      const toggleNav = () => {
-        if (!isMobile()) return;
-        setOpen(!nav.classList.contains("bevel-nav-open"));
-      };
-
-      toggle.addEventListener("click", toggleNav);
-      nav.addEventListener("click", (e) => {
-        if ((e.target as HTMLElement).closest(".navigation_link, .nav_main .btn")) {
-          setOpen(false);
-        }
-      });
-    }
-
-    // 6. Update copyright year
-    document.querySelectorAll("[data-year], .copyright-year").forEach((el) => {
-      el.textContent = String(new Date().getFullYear());
-    });
-
-    // 7. Refresh GSAP ScrollTrigger if loaded
-    const timer = setTimeout(() => {
-      // @ts-expect-error ScrollTrigger global
-      if (window.ScrollTrigger) {
-        // @ts-expect-error ScrollTrigger global
-        window.ScrollTrigger.refresh();
-      }
-    }, 500);
-
-    return () => {
-      clearTimeout(timer);
-      cleanupVideoTabs();
-    };
-  }, []);
+  const handleSelectImage = (src: string, title: string) => {
+    setSelectedImage({ src, title });
+  };
 
   return (
-    <>
-      <div
-        ref={containerRef}
-        id="bevel-app"
-        className="w-full"
-        dangerouslySetInnerHTML={{ __html: bevelPageHtml }}
+    <div className="min-h-screen flex flex-col bg-[#FFF8FA] text-[#2D2327]">
+      {/* Sticky Clean Navbar */}
+      <Navbar onOpenCheckout={handleOpenCheckout} />
+
+      {/* Main Content */}
+      <main className="flex-1">
+        {/* 1. Hero Section */}
+        <HeroSection onOpenCheckout={handleOpenCheckout} />
+
+        {/* 2. Marquee Ticker Ribbon */}
+        <MarqueeRibbon />
+
+        {/* 3. 5-Card Feature Grid */}
+        <FeatureCardsSection onSelectImage={handleSelectImage} />
+
+        {/* 4. Split Feature: Plan + Track + Achieve (Your Health Matters) */}
+        <HealthMattersSection
+          onOpenCheckout={handleOpenCheckout}
+          onSelectImage={handleSelectImage}
+        />
+
+        {/* 5. Split Feature: Track. Improve. Feel Amazing. */}
+        <TrackImproveSection
+          onOpenCheckout={handleOpenCheckout}
+          onSelectImage={handleSelectImage}
+        />
+
+        {/* 6. What's Inside 63+ Page Bundle Gallery */}
+        <WhatsInsideSection onSelectImage={handleSelectImage} />
+
+        {/* 7. Community Reviews & Glow-Up Stories */}
+        <ReviewsSection />
+
+        {/* 8. Pricing & Final CTA Bundle Card */}
+        <PricingCtaSection onOpenCheckout={handleOpenCheckout} />
+
+        {/* 9. FAQ Section */}
+        <FaqSection />
+      </main>
+
+      {/* Footer */}
+      <Footer />
+
+      {/* Interactive Lightbox Modal */}
+      <ImageLightboxModal
+        isOpen={Boolean(selectedImage)}
+        onClose={() => setSelectedImage(null)}
+        imageSrc={selectedImage?.src || null}
+        title={selectedImage?.title || ""}
+        onOpenCheckout={handleOpenCheckout}
       />
-      {testimonialsMount && createPortal(<StaggerTestimonials />, testimonialsMount)}
-    </>
+
+      {/* Instant Checkout / Download Modal */}
+      <DownloadModal
+        isOpen={checkoutOpen}
+        onClose={() => setCheckoutOpen(false)}
+      />
+    </div>
   );
 }
 
