@@ -1,26 +1,25 @@
 import { NavItem, PartnerBrand, BentoFeature, TestimonialItem } from "../types";
 
 export const navItems: NavItem[] = [
+  { label: "Home", href: "#hero" },
   { label: "Features", href: "#features" },
-  { label: "Strain & Sleep", href: "#strain-sleep" },
-  { label: "Biomarkers", href: "#biomarkers" },
-  { label: "Intelligence", href: "#intelligence" },
+  { label: "What's Inside", href: "#whats-inside" },
   { label: "Reviews", href: "#reviews" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 export const partnerBrands: PartnerBrand[] = [
-  { name: "Apple Watch", logo: "/assets/images/logos/apple-watch.svg", category: "Smartwatch" },
-  { name: "Oura Ring", logo: "/assets/images/logos/oura.svg", category: "Smart Ring" },
-  { name: "Garmin", logo: "/assets/images/logos/garmin.svg", category: "Sport Watches" },
-  { name: "Amazfit", logo: "/assets/images/logos/amazfit.svg", category: "Fitness Wearable" },
-  { name: "Google Health", logo: "/assets/images/logos/google-health-2026-logo-1.svg", category: "Ecosystem" },
+  { name: "Printable PDF", logo: "/assets/images/planner/01-hero-cover-glowup-planner.png", category: "Printable" },
+  { name: "GoodNotes", logo: "/assets/images/planner/02-daily-movement-workout-log.png", category: "Digital App" },
+  { name: "Notability", logo: "/assets/images/planner/03-sleep-water-hydration-tracker.png", category: "Digital App" },
+  { name: "iPad & Tablet", logo: "/assets/images/planner/04-weekly-checkin-planner.png", category: "Tablet" },
 ];
 
 export const heroStats = {
   rating: 4.9,
-  totalRatings: "25,000+",
-  activeMembers: "2.5M+",
-  tagline: "Apple App of the Day & Fitness Choice",
+  totalRatings: "28,600+",
+  activeMembers: "35,000+",
+  tagline: "Small Habits. Big Changes.",
 };
 
 export const bentoFeatures: BentoFeature[] = [
