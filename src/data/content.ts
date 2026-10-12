@@ -9,10 +9,10 @@ export const navItems: NavItem[] = [
 ];
 
 export const partnerBrands: PartnerBrand[] = [
-  { name: "Printable PDF", logo: "/assets/images/planner/01-hero-cover-glowup-planner.png", category: "Printable" },
-  { name: "GoodNotes", logo: "/assets/images/planner/02-daily-movement-workout-log.png", category: "Digital App" },
-  { name: "Notability", logo: "/assets/images/planner/03-sleep-water-hydration-tracker.png", category: "Digital App" },
-  { name: "iPad & Tablet", logo: "/assets/images/planner/04-weekly-checkin-planner.png", category: "Tablet" },
+  { name: "Printable PDF", logo: "/assets/images/planner/01-hero-cover-glowup-planner.webp", category: "Printable" },
+  { name: "GoodNotes", logo: "/assets/images/planner/02-daily-movement-workout-log.webp", category: "Digital App" },
+  { name: "Notability", logo: "/assets/images/planner/03-sleep-water-hydration-tracker.webp", category: "Digital App" },
+  { name: "iPad & Tablet", logo: "/assets/images/planner/04-weekly-checkin-planner.webp", category: "Tablet" },
 ];
 
 export const heroStats = {
